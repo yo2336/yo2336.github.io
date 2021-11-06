@@ -33,9 +33,10 @@ ny_rest =
 
 ```{r}
 ny_rest %>%
-  filter(grade %in% c("A", "B", "C")) %>%
+  select(boro, score, zipcode, grade) %>%
+  filter(grade == "A") %>%
   plot_ly(
-    x = ~zipcode, y = ~score, color = ~grade, type = "scatter", mode = "markers"
+    x = ~zipcode, y = ~score, color = ~boro, type = "scatter", mode = "markers"
   )
 ```
 

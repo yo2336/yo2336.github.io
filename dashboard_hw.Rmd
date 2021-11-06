@@ -1,0 +1,61 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(p8105.datasets)
+
+library(plotly)
+```
+
+```{r}
+data("rest_inspec")
+
+ny_rest = 
+  rest_inspec %>%
+  select(boro, score, violation_code, zipcode, grade) %>%
+  filter(boro %in% c("BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "STATEN ISLAND")) %>%
+  drop_na(grade)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Distribution of Scores with Grade A Across Zipcodes
+
+```{r}
+ny_rest %>%
+  select(boro, score, zipcode, grade) %>%
+  filter(grade == "A") %>%
+  plot_ly(
+    x = ~zipcode, y = ~score, color = ~boro, type = "scatter", mode = "markers"
+  )
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Distribution of Grades Across 5 Boros
+
+```{r}
+ny_rest %>% 
+  filter(grade %in% c("A", "B", "C")) %>%
+  count(boro, grade, name = "count") %>% 
+  plot_ly(x = ~boro, y = ~count, color = ~grade, type = "bar")
+```
+
+### Distribution of Score Across 5 boros
+
+```{r}
+ny_rest %>%
+  filter(boro == "MANHATTAN") %>%
+  filter(grade %in% c("A", "B", "C")) %>%
+  plot_ly(y = ~score, color = ~grade, type = "box")
+```
+
