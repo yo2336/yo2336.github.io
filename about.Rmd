@@ -1,0 +1,50 @@
+---
+title: "About Me"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+---
+
+# Education
+
+### Columbia Mailman School of Public Health
+
+#### Biostatistics MS
+
+Expected 5/2023
+
+
+### University of Colorado Boulder
+
+#### Integrative Physiology BA
+#### Public Health Certificate
+
+5/2017
+
+
+
+# Professional Experience
+
+### Patient Access Representative
+
+#### UCHealth University of Colorado Hospital Anschutz Medical Campus
+#### Emergency Department
+Aurora, Colorado
+
+11/2017 - 7/2021
+
+
+### Health Services Intern
+##### Lutheran Family Services Rocky Mountains
+##### Refugee and Asylee Program
+Denver, Colorado
+
+6/2017 - 1/2018
+
+#
+#
+#
+
+For more, check out my linkedin page!

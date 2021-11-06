@@ -1,0 +1,59 @@
+---
+title: "plotly"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+---
+
+Some Plots!
+
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+
+library(plotly)
+```
+
+
+
+```{r}
+data("rest_inspec")
+
+ny_rest = 
+  rest_inspec %>%
+  select(boro, score, violation_code, zipcode, grade) %>%
+  filter(boro %in% c("BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "STATEN ISLAND")) %>%
+  drop_na(grade)
+```
+
+
+## Scatterplot
+
+```{r}
+ny_rest %>%
+  filter(grade %in% c("A", "B", "C")) %>%
+  plot_ly(
+    x = ~zipcode, y = ~score, color = ~grade, type = "scatter", mode = "markers"
+  )
+```
+
+## Boxplot
+
+```{r}
+ny_rest %>%
+  filter(boro == "MANHATTAN",
+         grade %in% c("A", "B", "C")) %>%
+  plot_ly(y = ~score, color = ~grade, type = "box")
+```
+
+## Bar chart
+
+```{r}
+ny_rest %>% 
+  count(boro, violation_code, name = "count") %>%
+  mutate(violation_code = fct_reorder(violation_code, count)) %>%
+  plot_ly(x = ~violation_code, y = ~count, color = ~boro, type = "bar")
+```
+
